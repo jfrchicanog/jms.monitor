@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Monitor de altas de usuarios</title>
+<script type="text/javascript">
+	var wsocket;
+	function connect() {
+		wsocket = new WebSocket("ws://localhost:8080/jms.monitor-0.0.1-SNAPSHOT/monitor");
+		wsocket.onmessage = onMessage;
+	}
+	function onMessage(evento) {
+		var nombre = evento.data;
+		document.getElementById("datos").innerHTML += "<tr><td>"+nombre+"</td></tr>";
+	}
+	window.addEventListener("load", connect, false);
+</script>
+</head>
+<body>
+		<h1>Monitor de altas de usuarios</h1>
+		
+		<table>
+			<thead>
+				<tr>
+					<th>Nueva cuenta</th>
+				</tr>
+			</thead>
+			<tbody id="datos">
+			
+			</tbody>
+		</table>
+	</body>
+</html>
